@@ -41,8 +41,11 @@
 {
     NSURLSession *urlSession = [NSURLSession sharedSession];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    //github权限问题 添加token之后搜索api的litmit从10增加到30 其他api从60增加到5000
-    [request addValue:@"token e567558344f1fbbfe63a91ee33324b5471d7d89e" forHTTPHeaderField:@"Authorization"];
+    /*github权限问题 添加Authorization之后搜索api的litmit从10增加到30 其他api从60增加到5000
+     *but github不允许将授权token密匙放在代码中提交到开源库 否则会自动撤销相关证书
+     *如需可自行创建授权解开下行注释并替换token或咨询本人
+     */
+//    [request addValue:@"token e567558344f1fbbfe63a91ee33324b5471d7d89e" forHTTPHeaderField:@"Authorization"];
     NSURLSessionTask *sessionTask = [urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (!error) {
